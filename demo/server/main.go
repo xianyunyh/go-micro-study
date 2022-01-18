@@ -1,25 +1,29 @@
 package main
 
 import (
-	"go-micro-study/registry"
-	"go-micro.dev/v4"
-	"go-micro.dev/v4/server"
+	"go-micro-study/hello/handler"
+	pb "go-micro-study/hello/proto"
 	"log"
 
-	httpServer "github.com/asim/go-micro/plugins/server/http/v4"
+	"go-micro.dev/v4"
+	"go-micro.dev/v4/server"
+
 	"net/http"
+
+	grcpServer "github.com/asim/go-micro/plugins/server/grpc/v4"
+	httpServer "github.com/asim/go-micro/plugins/server/http/v4"
 )
 
-
-func main()  {
+func main() {
 	//创建http服务
-	serv := newHttpServer("demo",":8080")
+	serv := newHttpServer("demo", ":8080")
 	//创建注册中心
-	reg := registry.NewConsulRegistry(":8500")
+	//reg := registry.NewConsulRegistry(":8500")
+	rpcServ := newRpcServer("demo", ":9099")
 	//实例一个服务
 	var service = micro.NewService(
 		micro.Server(serv),
-		micro.Registry(reg),
+		micro.Server(rpcServ),
 	)
 
 	service.Init()
@@ -30,7 +34,7 @@ func main()  {
 	}
 }
 
-func  newHttpServer(name,addr string) server.Server {
+func newHttpServer(name, addr string) server.Server {
 	var serv = httpServer.NewServer(
 		server.Address(addr),
 		server.Name(name),
@@ -41,5 +45,13 @@ func  newHttpServer(name,addr string) server.Server {
 	})
 	h := serv.NewHandler(mux)
 	_ = serv.Handle(h)
+	return serv
+}
+
+func newRpcServer(name, addr string) server.Server {
+	var serv = grcpServer.NewServer(
+		server.Name(name), server.Address(addr),
+	)
+	_ = pb.RegisterHelloHandler(serv, new(handler.Hello))
 	return serv
 }
