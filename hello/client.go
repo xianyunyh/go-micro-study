@@ -10,6 +10,8 @@ import (
 	log "go-micro.dev/v4/logger"
 )
 
+//go:generate protoc --proto_path=. --micro_out=. --go_out=:. proto/*.proto
+
 func main() {
 	// Create service
 	srv := micro.NewService()
