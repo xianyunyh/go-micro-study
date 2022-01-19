@@ -16,14 +16,17 @@ import (
 
 func main() {
 	//创建http服务
-	serv := newHttpServer("demo", ":8080")
+	//serv := newHttpServer("demo", ":8080")
 	//创建注册中心
 	//reg := registry.NewConsulRegistry(":8500")
-	rpcServ := newRpcServer("demo", ":9099")
+	//rpcServ := newRpcServer("demo", ":9099")
 	//实例一个服务
+	serv2 := server.NewServer(server.Address(":9099"))
+	_ = pb.RegisterHelloHandler(serv2, new(handler.Hello))
 	var service = micro.NewService(
-		micro.Server(serv),
-		micro.Server(rpcServ),
+		//micro.Server(serv),
+		micro.Server(serv2),
+		//micro.Server(rpcServ),
 	)
 
 	service.Init()
