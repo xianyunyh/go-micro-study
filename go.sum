@@ -87,6 +87,7 @@ github.com/asim/go-micro/plugins/server/grpc/v4 v4.0.0-20220111133620-1e2d197c7d
 github.com/asim/go-micro/plugins/server/grpc/v4 v4.0.0-20220111133620-1e2d197c7d5f/go.mod h1:uQACKU+/RcWKEMdX6/Ewd+TxCPLIsLPt9ym6++B1X68=
 github.com/asim/go-micro/plugins/server/http/v4 v4.0.0-20220115202627-a612e09a341f h1:pkTeia6YEmbZIetjJK5Ps+6HwvdqM5ilZ2SPXj/MWfM=
 github.com/asim/go-micro/plugins/server/http/v4 v4.0.0-20220115202627-a612e09a341f/go.mod h1:LEsuhy4ZF3UGT9VSOoj/ZP0MZt4brlgwJVG7/LAac+I=
+github.com/asim/go-micro/plugins/transport/grpc/v4 v4.0.0-20211019191242-9edc569e68bb h1:rCIGzR4YRddwaWM4pZkbxHIkhFbbuGZOqivnxyKNQz8=
 github.com/asim/go-micro/plugins/transport/grpc/v4 v4.0.0-20211019191242-9edc569e68bb/go.mod h1:dzSEAsAqQ4mRaYPJ07KcAt6rIjYUJ9w55UXvnyGx4VE=
 github.com/aws/aws-sdk-go v1.37.27/go.mod h1:hcU610XS61/+aQV88ixoOzUoG7v3b31pl2zKMmprdro=
 github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973/go.mod h1:Dwedo/Wpr24TaqPxmxbtue+5NUziq4I4S80YR8gNf3Q=
@@ -930,6 +931,7 @@ google.golang.org/grpc v1.40.0/go.mod h1:ogyxbiOoUXAkP+4+xa6PZSE9DZgIHtSpzjDTB9K
 google.golang.org/grpc v1.42.0 h1:XT2/MFpuPFsEX2fWh3YQtHkZ+WYZFQRfaUgLZYj/p6A=
 google.golang.org/grpc v1.42.0/go.mod h1:k+4IHHFw41K8+bbowsex27ge2rCb65oeWqe4jJ590SU=
 google.golang.org/grpc/examples v0.0.0-20210902184326-c93e472777b9/go.mod h1:gID3PKrg7pWKntu9Ss6zTLJ0ttC0X9IHgREOCZwbCVU=
+google.golang.org/grpc/examples v0.0.0-20211102180624-670c133e568e h1:m7aQHHqd0q89mRwhwS9Bx2rjyl/hsFAeta+uGrHsQaU=
 google.golang.org/grpc/examples v0.0.0-20211102180624-670c133e568e/go.mod h1:gID3PKrg7pWKntu9Ss6zTLJ0ttC0X9IHgREOCZwbCVU=
 google.golang.org/protobuf v0.0.0-20200109180630-ec00e32a8dfd/go.mod h1:DFci5gLYBciE7Vtevhsrf46CRTquxDuWsQurQQe4oz8=
 google.golang.org/protobuf v0.0.0-20200221191635-4d8936d0db64/go.mod h1:kwYJMbMJ01Woi6D6+Kah6886xMZcty6N08ah7+eCXa0=
