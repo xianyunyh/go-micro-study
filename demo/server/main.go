@@ -1,8 +1,6 @@
 package main
 
 import (
-	"go-micro-study/hello/handler"
-	pb "go-micro-study/hello/proto"
 	"log"
 
 	"go-micro.dev/v4"
@@ -10,7 +8,6 @@ import (
 
 	"net/http"
 
-	grcpServer "github.com/asim/go-micro/plugins/server/grpc/v4"
 	httpServer "github.com/asim/go-micro/plugins/server/http/v4"
 )
 
@@ -22,7 +19,6 @@ func main() {
 	//rpcServ := newRpcServer("demo", ":9099")
 	//实例一个服务
 	serv2 := server.NewServer(server.Address(":9099"))
-	_ = pb.RegisterHelloHandler(serv2, new(handler.Hello))
 	var service = micro.NewService(
 		//micro.Server(serv),
 		micro.Server(serv2),
@@ -48,13 +44,5 @@ func newHttpServer(name, addr string) server.Server {
 	})
 	h := serv.NewHandler(mux)
 	_ = serv.Handle(h)
-	return serv
-}
-
-func newRpcServer(name, addr string) server.Server {
-	var serv = grcpServer.NewServer(
-		server.Name(name), server.Address(addr),
-	)
-	_ = pb.RegisterHelloHandler(serv, new(handler.Hello))
 	return serv
 }
