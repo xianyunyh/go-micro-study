@@ -22,8 +22,9 @@ type Server interface {
 - github.com/asim/go-micro/plugins/server/http/v4
 - github.com/asim/go-micro/plugins/server/grpc/v4
 
-### 简单使用
-完整代码![server/http.go](server/http.go)
+## HTTP服务
+
+完整代码[server/http.go](server/http.go)
 ```go
 import (
 	"log"
@@ -57,4 +58,95 @@ func main() {
         log.Fatal(err.Error())
     }
 }
+```
+
+## RPC服务
+
+`go-micro` 内置了 gRPC
+
+```shell
+#安装grpc依赖
+
+$ go get -u google.golang.org/protobuf/proto
+$ go install github.com/golang/protobuf/protoc-gen-go@latest
+$ go install go-micro.dev/v4/cmd/protoc-gen-micro@latest
+
+# 安装protoc-micro
+$ go install go-micro.dev/v4/cmd/protoc-gen-micro@v4
+
+```
+
+### 创建protoc文件
+
+在proto目录下创建hello.proto文件
+
+```protobuf
+syntax = "proto3";
+
+package hello;
+
+option go_package = "./;proto";
+
+service Hello {
+	rpc Call(CallRequest) returns (CallResponse) {}
+	rpc ClientStream(stream ClientStreamRequest) returns (ClientStreamResponse) {}
+	rpc ServerStream(ServerStreamRequest) returns (stream ServerStreamResponse) {}
+	rpc BidiStream(stream BidiStreamRequest) returns (stream BidiStreamResponse) {}
+}
+
+message CallRequest {
+	string name = 1;
+}
+
+message CallResponse {
+	string msg = 1;
+}
+
+message ClientStreamRequest {
+	int64 stroke = 1;
+}
+
+message ClientStreamResponse {
+	int64 count = 1;
+}
+
+message ServerStreamRequest {
+	int64 count = 1;
+}
+
+message ServerStreamResponse {
+	int64 count = 1;
+}
+
+message BidiStreamRequest {
+	int64 stroke = 1;
+}
+
+message BidiStreamResponse {
+	int64 stroke = 1;
+}
+```
+
+
+### 生成代码
+```shell
+$ cd protoc
+$ protoc --proto_path=. --micro_out=. --go_out=:. *.proto
+```
+
+### 创建服务
+完整代码在 [server/rpc.go](server/rpc.go)
+```go
+//创建服务
+serv := micro.NewService(micro.Address(":9099"), micro.Name("rpc_demo"))
+//注册服务
+err := pb.RegisterHelloHandler(serv.Server(), new(h.Hello))
+if err != nil {
+log.Fatal(err.Error())
+}
+serv.Init()
+if err := serv.Run(); err != nil {
+log.Fatal(err.Error())
+}
+
 ```

@@ -1,8 +1,9 @@
 package main
 
 import (
-	"log"
 	"net/http"
+
+	"go-micro.dev/v4/logger"
 
 	httpServer "github.com/asim/go-micro/plugins/server/http/v4"
 	"go-micro.dev/v4"
@@ -11,7 +12,7 @@ import (
 
 const (
 	serviceName = "http_demo"
-	serviceAddr = ":9099"
+	serviceAddr = ":9098"
 )
 
 func main() {
@@ -20,7 +21,8 @@ func main() {
 	_ = serv.Handle(h)
 	service := micro.NewService(micro.Server(serv))
 	if err := service.Run(); err != nil {
-		log.Fatal(err)
+		logger.Error(err.Error())
+		return
 	}
 }
 
@@ -28,6 +30,7 @@ func handler() http.Handler {
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/test", func(resp http.ResponseWriter, request *http.Request) {
+		logger.Infof("request_method:[%s]", request.Method)
 		_, _ = resp.Write([]byte(`{"code":1}`))
 	})
 	return mux

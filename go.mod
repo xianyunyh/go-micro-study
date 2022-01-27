@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/asim/go-micro/plugins/client/grpc/v4 v4.0.0-20220111133620-1e2d197c7d5f
-	github.com/asim/go-micro/plugins/client/http/v4 v4.0.0-20220115202627-a612e09a341f
+	github.com/asim/go-micro/plugins/client/http/v4 v4.0.0-20220118152736-9e0be6c85d75
 	github.com/asim/go-micro/plugins/registry/consul/v4 v4.0.0-20220115202627-a612e09a341f
 	github.com/asim/go-micro/plugins/server/grpc/v4 v4.0.0-20220111133620-1e2d197c7d5f
 	github.com/asim/go-micro/plugins/server/http/v4 v4.0.0-20220115202627-a612e09a341f
