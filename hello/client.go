@@ -19,7 +19,6 @@ func main() {
 
 	// Create client
 	c := pb.NewHelloService(service, srv.Client())
-
 	for {
 		// Call service
 		rsp, err := c.Call(context.Background(), &pb.CallRequest{Name: "John"})
